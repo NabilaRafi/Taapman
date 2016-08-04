@@ -1,0 +1,38 @@
+{
+  "name": "weatherappreact",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NabilaRafi/WeatherAppReact.git"
+  },
+  "author": "Nabila Rafi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NabilaRafi/WeatherAppReact/issues"
+  },
+  "homepage": "https://github.com/NabilaRafi/WeatherAppReact#readme",
+  "dependencies": {
+    "browserify": "^13.1.0",
+    "classnames": "^2.2.5",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-react": "^3.1.0",
+    "gulp-sass": "^2.3.2",
+    "gulp-server-livereload": "^1.8.2",
+    "gulp-util": "^3.0.7",
+    "gulp-watch": "^4.3.9",
+    "node-notifier": "^4.6.0",
+    "react": "^15.3.0",
+    "react-dom": "^15.3.0",
+    "react-geosuggest": "^1.24.1",
+    "reactify": "^1.1.1",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.7.0",
+    "whatwg-fetch": "^1.0.0"
+  }
+}

@@ -1,2 +1,1 @@
-# Taapman
-WeatherApp built using Reactjs
+# WeatherAppReact
