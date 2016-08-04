@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/NabilaRafi/WeatherAppReact#readme",
   "dependencies": {
+    "bower": "^1.7.9",
     "browserify": "^13.1.0",
     "classnames": "^2.2.5",
     "gulp": "^3.9.1",
