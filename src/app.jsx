@@ -1,9 +1,9 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var classNames = require('classnames');
-var Geosuggest = require('react-geosuggest').default;
 
 var WeatherHeader = require('./components/atoms/headers.jsx');
+var SearchLocation = require('./components/atoms/searchLocation.jsx');
 var Api = require('./utils/api');
 
 var query = ''; // Expects something like this ?city=London,Paris,Berlin,Madrid
@@ -37,19 +37,11 @@ var Weather = React.createClass({
         }
         
        var fixtures =[];
+         
     // Render the DOM elements
     return (<div>
-               
-                <div>
-                    <Geosuggest
-                      placeholder="Enter the location ..."
-                      initialValue=""
-                      fixtures={fixtures}
-                      onSuggestSelect={this.onSuggestSelect}
-                      location={new google.maps.LatLng(53.558572, 9.9278215)}
-                      radius="20" />
-                </div>
-
+                          
+<SearchLocation></SearchLocation>
                 <div className={bgColorClass}>
                     <h1 className="city">{currentCityName}</h1>
                     <div className="weather">
@@ -115,28 +107,6 @@ componentWillMount: function() {
 
     this.fetchData();
 },
-                                
-onSuggestSelect: function(suggest) {
-    console.log(suggest);
-      
-      var geocoder = new google.maps.Geocoder();
-
-        geocoder.geocode({ 'placeId': suggest.placeId }, function (results, status) {
-            var latitude;
-            var longitude;
-
-            if (status == google.maps.GeocoderStatus.OK) {
-                 latitude = results[0].geometry.location.lat();
-                 longitude = results[0].geometry.location.lng();            
-
-            }
-            this.setState ({
-                lat :latitude,
-                lng:longitude
-            });   
-        }.bind(this));
-    this.fetchData();
-  },
  
 });
 ReactDOM.render(<WeatherHeader />,document.getElementById('app'));
