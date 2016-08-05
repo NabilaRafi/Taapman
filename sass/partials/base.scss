@@ -1,9 +1,9 @@
 // Colours
 $very-warm: #FF8500;
-$warm: #ffc600;
-$normal: #94AF10;
-$cold: #06799F;
-$very-cold: #233884;
+$warm: #FF8500;
+$normal: #FF8500;
+$cold: #FF8500;
+$very-cold: #FF8500;
 
 // Breakpoints
 $mobile-width: 500px;
@@ -63,6 +63,8 @@ div #headerStyle{
     width: 100%;
     text-align: center;
     border-bottom: 2px solid white;
+    
+     
 
     @include mobile {
         height: 350px;
@@ -85,15 +87,19 @@ div #headerStyle{
     max-width: 550px;
     margin-left: auto;
     margin-right: auto;
+    text-align: center;
+    font-size: 2.5em;
+    
+    
 
     .temp {
-        font-size: 13.5em;
+        font-size: 2.5em;
         float: left;
-        width: 55%;
+        width: 25%;
         max-height: 200px;
 
         @include mobile {
-            font-size: 9em;
+            font-size: 2em;
         }
 
         .temp-number, .wi {
@@ -105,10 +111,12 @@ div #headerStyle{
             font-size: 1.5em;
             line-height: 0.8em;
         }
+        
+       
     }
 
     .humidity, .wind {
-        font-size: 5em;
+        font-size: 1em;
 
         @include mobile {
             font-size: 3em;
@@ -116,24 +124,27 @@ div #headerStyle{
 
         .wi {
             vertical-align: top;
-            width: 70px;
+             width: 50px;
+           
 
             @include mobile {
-                width: 40px;
+                width: 10px;
             }
         }
     }
 
     .humidity {
-        margin-bottom: 20px;
+        margin-bottom: 1px;
+        
     }
 
     .wind {
         .wi {
-            font-size: 0.82em;
+//            font-size: .8em;
+             margin-left: 55px;
         }
         .vel {
-            font-size: 0.6em;
+            font-size: .9em;
         }
     }
 }

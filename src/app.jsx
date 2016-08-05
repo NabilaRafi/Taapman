@@ -2,9 +2,11 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var classNames = require('classnames');
 
+
 var WeatherHeader = require('./components/atoms/headers.jsx');
 var SearchLocation = require('./components/atoms/searchLocation.jsx');
 var Api = require('./utils/api');
+
 
 var query = ''; // Expects something like this ?city=London,Paris,Berlin,Madrid
 var selectedCityWeather;
