@@ -14,6 +14,9 @@ $mobile-width: 500px;
 }
 
 // DOM Elements
+
+//header styling
+
 .weather-widget {
     width: 100%;
     color: white;
@@ -100,7 +103,7 @@ $mobile-width: 500px;
     }
 
     .humidity, .wind {
-        font-size: 5em;
+        font-size: 1em;
 
         @include mobile {
             font-size: 3em;
@@ -108,7 +111,8 @@ $mobile-width: 500px;
 
         .wi {
             vertical-align: top;
-            width: 70px;
+             width: 50px;
+           
 
             @include mobile {
                 width: 10px;
@@ -117,15 +121,17 @@ $mobile-width: 500px;
     }
 
     .humidity {
-        margin-bottom: 20px;
+        margin-bottom: 1px;
+        
     }
 
     .wind {
         .wi {
-            font-size: 0.2em;
+//            font-size: .8em;
+             margin-left: 55px;
         }
         .vel {
-            font-size: 0.2em;
+            font-size: .9em;
         }
     }
 }

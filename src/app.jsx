@@ -3,6 +3,7 @@ var ReactDOM = require('react-dom');
 var classNames = require('classnames');
 var Geosuggest = require('react-geosuggest').default;
 
+var WeatherHeader = require('./components/atoms/headers.jsx');
 var Api = require('./utils/api');
 
 var query = ''; // Expects something like this ?city=London,Paris,Berlin,Madrid
@@ -14,9 +15,11 @@ var currentCityName='London';
 var Weather = React.createClass({
     render: function() {
         
+        
         //Build class names with dynamic data
     var weatherClass = classNames('wi wi-owm-' + this.state.weather);
     var bgColorClass = 'weather-widget '; // very-warm, warm, normal, cold, very-cold
+
       bgColorClass += 'very-warm';
 //        // Set the background colour based on the temperature
 //        if (this.state.temp >= 30) {
@@ -34,10 +37,11 @@ var Weather = React.createClass({
 //        else if (this.state.temp <= 0) {
 //        bgColorClass += 'very-cold';
 //        }
-        
+
        var fixtures =[];
     // Render the DOM elements
     return (<div>
+               
                 <div>
                     <Geosuggest
                       placeholder="Enter the location ..."
@@ -142,5 +146,5 @@ onSuggestSelect: function(suggest) {
   },
  
 });
-
+ReactDOM.render(<WeatherHeader />,document.getElementById('app'));
 ReactDOM.render(<Weather />, document.querySelector('.container'));
