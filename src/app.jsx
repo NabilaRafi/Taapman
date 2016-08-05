@@ -136,9 +136,7 @@ onSuggestSelect: function(suggest) {
                 lng:longitude
             });   
         }.bind(this));
-    console.log('API Call');
     this.fetchData();
-    console.log('Call end');
   },
  
 });

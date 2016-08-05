@@ -4,9 +4,6 @@ var apiUrl = '&appid=f8e8abf11f2158703727c5ec3aa18578';
 
 module.exports = {
     get: function(position) {
-        console.log("reached api call");
-        console.log("Latitude : " + position.lat +'lng'+position.lng);
-        console.log(rootUrl + position.lat + "&lon="+position.lng+apiUrl);
         return fetch(rootUrl + position.lat + "&lon="+position.lng+apiUrl, {
             
             headers: {
