@@ -8,7 +8,7 @@ var WeatherHeader = React.createClass({
               <img src="../../images/headerIcon.png" alt=" Taapmaan "></img>
               <h1> TaapMan</h1>
             </div>
-        );
+        )
     }
 });
 
