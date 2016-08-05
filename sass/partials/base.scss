@@ -36,6 +36,19 @@ $mobile-width: 500px;
     &.very-cold { background-color: $very-cold; }
 }
 
+div #headerStyle{
+   text-align: center; 
+   color:brown;
+   font-weight: 700;
+   font-size: xx-large;
+   padding-bottom: 20px;
+   display: inline;
+}
+
+#headerDiv{
+   background-color: ghostwhite;
+   
+}
 .city {
     font-size: 4em;
     text-transform: uppercase;
