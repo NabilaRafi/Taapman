@@ -5,7 +5,7 @@ var WeatherHeader = React.createClass({
         return(
             <div >
                 <div id = "headerDiv">
-                  <img src="../../images/headerIcon.png" alt=" Taapmaan "/>
+                  <img src="src/images/headerIcon.png" alt=" Taapmaan "/>
                   <h1 id="headerStyle"> Taapmaan</h1>
                 </div>
             </div>
