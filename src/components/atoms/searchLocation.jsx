@@ -19,7 +19,7 @@ var SearchLocation = React.createClass({
         );
     },
     onSuggestSelect: function(suggest) {
-    console.log(suggest);
+    //console.log(suggest);
       
       var geocoder = new google.maps.Geocoder();
         var latitude;
@@ -40,9 +40,6 @@ var SearchLocation = React.createClass({
                  console.log("lng:" + longitude) 
             
         }.bind(this));
-     console.log("lng:" + longitude);
-        console.log("Suggest location : "+suggest.location.lat);
-        console.log("Suggest location : "+suggest.location.lng);
     this.props.onNewLocation(suggest.location.lat,suggest.location.lng);
   }
     
