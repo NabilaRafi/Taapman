@@ -5,6 +5,8 @@ var classNames = require('classnames');
 
 var WeatherHeader = require('./components/atoms/headers.jsx');
 var SearchLocation = require('./components/atoms/searchLocation.jsx');
+var LocationName = require('./components/atoms/locationName.jsx');
+
 var Api = require('./utils/api');
 
 
@@ -43,9 +45,11 @@ var Weather = React.createClass({
     // Render the DOM elements
     return (<div>
                           
-<SearchLocation></SearchLocation>
+
+              <SearchLocation onNewLocation={this.fetchData}></SearchLocation> 
                 <div className={bgColorClass}>
                     <h1 className="city">{currentCityName}</h1>
+                    
                     <div className="weather">
                         <i className={weatherClass}></i>
                     </div>
@@ -72,13 +76,10 @@ getInitialState: function() {
     
 
     
-fetchData: function() {
-    console.log('Fetch data');
-    console.log(this.state.lat+" lat");
+fetchData: function(lat,lng) {
 
-        console.log("if else");
         // Request new data to the API
-        Api.get({lat:this.state.lat,lng:this.state.lng})
+        Api.get({lat:lat,lng:lng})
             .then(function(data) {
                 selectedCityWeather = data;
                 currentCityName=data.name;

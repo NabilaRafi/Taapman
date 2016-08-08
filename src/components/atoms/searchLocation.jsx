@@ -5,8 +5,7 @@ var SearchLocation = React.createClass({
     render : function(){
         return(
            <div className="well row">
-                <div className="col-sm-4">
-                </div>
+                <div className="col-sm-4"></div>
                 <div className="col-sm-4">
                     <Geosuggest
                       placeholder="Enter the location ..."
@@ -23,10 +22,11 @@ var SearchLocation = React.createClass({
     console.log(suggest);
       
       var geocoder = new google.maps.Geocoder();
+        var latitude;
+        var longitude;
 
         geocoder.geocode({ 'placeId': suggest.placeId }, function (results, status) {
-            var latitude;
-            var longitude;
+            
 
             if (status == google.maps.GeocoderStatus.OK) {
                  latitude = results[0].geometry.location.lat();
@@ -36,10 +36,15 @@ var SearchLocation = React.createClass({
             this.setState ({
                 lat :latitude,
                 lng:longitude
-            });   
+            }); 
+                 console.log("lng:" + longitude) 
+            
         }.bind(this));
-    this.fetchData();
-  },
+     console.log("lng:" + longitude);
+        console.log("Suggest location : "+suggest.location.lat);
+        console.log("Suggest location : "+suggest.location.lng);
+    this.props.onNewLocation(suggest.location.lat,suggest.location.lng);
+  }
     
 });
 
