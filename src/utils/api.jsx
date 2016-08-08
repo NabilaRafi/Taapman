@@ -1,5 +1,6 @@
 var Fetch = require('whatwg-fetch');
 var rootUrl = 'http://api.openweathermap.org/data/2.5/weather?lat=';
+var forecastUrl = 'http://api.openweathermap.org/data/2.5/forecast?lat=';
 var apiUrl = '&appid=f8e8abf11f2158703727c5ec3aa18578';
 
 module.exports = {
@@ -13,5 +14,16 @@ module.exports = {
         .then(function(response) {
             return response.json();
         });
-    }
+    },
+	getForecast: function(position){
+		return fetch(forecastUrl + position.lat + "&lon="+position.lng+apiUrl, {
+            
+            headers: {
+                // No need for special headers
+            }
+        })
+        .then(function(response) {
+            return response.json();
+        });
+	}
 };
