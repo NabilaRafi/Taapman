@@ -23,33 +23,22 @@ var Weather = React.createClass({
     render: function() {
     // in componentdidmount ask for location      
     // Render the DOM elements
-<<<<<<< HEAD
-    return (<div>                  
 
-              <SearchLocation onNewLocation={this.fetchData}></SearchLocation> 
-                  
-              <CurrentWeather currentCityName = {currentCityName} temp={this.state.temp} weather={this.state.weather} wind={this.state.wind} humidity={this.state.humidity}></CurrentWeather>
-            
-              <WeeklyWeatherMolecule temp = {this.state.temp} weather={this.state.weather}/>
-            
-            <WeeklyWeatherMolecule desc={this.state.desc} condition={this.state.condition} wind={this.state.wind} forecast={this.state.forecast}/>
-            </div>
-           ) 
-           
-=======
 	var isLocationAvailable = this.state.isLocationAvailable;
-	var currentWeather = <CurrentWeather currentCityName = {currentCityName} temp={this.state.temp} weather={this.state.weather} wind={this.state.wind} humidity={this.state.humidity}></CurrentWeather>;
+
+	var currentWeatherDisplay = <CurrentWeather currentCityName = {this.state.name} temp = {this.state.temp} weather = {this.state.weather} wind = {this.state.wind} humidity = {this.state.humidity} />;
+        
+    var weeklyWeatherDisplay = <WeeklyWeatherMolecule desc={this.state.desc} condition={this.state.condition} wind={this.state.wind} forecast={this.state.forecast} />    
 		
 	var weatherNotFound = <div>Location not found</div>; 
     return (<div>
                           
               <SearchLocation onNewLocation={this.fetchData}></SearchLocation> 
 			                    
-			{(isLocationAvailable) ? currentWeather : weatherNotFound}
-             
-			 <WeeklyWeatherMolecule desc={this.state.desc} condition={this.state.condition} wind={this.state.wind} forecast={this.state.forecast} />
+                {(isLocationAvailable) ? currentWeatherDisplay : weatherNotFound}
+                {(isLocationAvailable) ? weeklyWeatherDisplay : weatherNotFound}
+            
             </div>);
->>>>>>> 01c8cdb9f82be235de66baa2f0570317046b3764
 },
 
 // Init data for UI
@@ -73,110 +62,74 @@ getInitialState: function() {
 
     
 fetchData: function(lat,lng) {
-	
-		console.log(Api);
-
-        // Request new data to the API
-        Api.get({lat:lat,lng:lng})
-            .then(function(data) {
-                selectedCityWeather = data;
-                currentCityName=data.name;
-				console.log('API Data is ');
-				console.log(data);
-				this.setState({ weather: '',
-								desc: data.weather[0].description,
-								condition: data.weather[0].main,
-								wind: data.wind.speed,
-							  	currentCityName:data.name,
-							  	isLocationAvailable:true});
-				this.updateData();
-        }.bind(this));
-	
-	   // Request new data to the API
-        Api.getForecast({lat:lat,lng:lng})
-            .then(function(data) {
-                console.log('Forecast API Data is ');
-				//console.log(data.cnt);
-/*			console.log(moment());
-			console.log('New date check');
-			var day1 = moment().startOf('day');
-			console.log("Current day");
-			console.log(day1);
-			var day2 = moment('2016-08-08 12:00:00').startOf('day');
-			if(day1.diff(day2) == 0)
-				console.log('Same dates');
-			else console.log('Different dates');*/
-			
-			//console.log(day);
-			var counter=0;
-			var forecast=[{}];
-			var hourly=[{}];
-			var dte;
-			
-			dayCounter=moment(data.list[0].dt_txt).startOf('day');
-			dte=moment(data.list[0].dt_txt).startOf('day');
-			
-			for(i=0;i<data.list.length;i++){
-					if(dayCounter.diff(moment(data.list[i].dt_txt).startOf('day'))==0){
-							hourly.push({
-								dte: data.list[i].dt_txt,
-								temp: data.list[i].main.temp,
-								wind: data.list[i].wind.speed
-							});
-					
-						dte=moment(data.list[i].dt_txt).startOf('day');
-					}
-					else{
-						forecast.push({hourly:hourly,
-								  date: dte});
-						dayCounter=moment(data.list[i].dt_txt).startOf('day');
-						hourly=[];
-					}
-				
-				}
-			
-			
-			console.log('Forecast array');
-			console.log(forecast);
-			this.setState({forecast:forecast});
-			
-        }.bind(this));
-//    
-},
- 			/*	console.log('Moment operations'+i);
-					console.log(dayCounter);
-					console.log(moment(data.list[i].dt_txt).startOf('day'));*/
-			/*	
-					if(dayCounter.diff(moment(data.list[i].dt_txt).startOf('day'))==0)
-						console.log('The dates are same');
-					else
-						console.log('The dates are different');
-					*/
-updateData: function() {
-    // Update the data for the UI
-    this.setState({
-        weather: selectedCityWeather.weather[0].id,
-        temp: Math.round(selectedCityWeather.main.temp - 273.15), // Kelvin to Celcius
-        humidity: Math.round(selectedCityWeather.main.humidity),
-        wind: Math.round(selectedCityWeather.wind.speed),
-        name:selectedCityWeather.name,
-		isLocationAvailable: true
+    var promises = [Api.get({lat:lat,lng:lng}), Api.getForecast({lat:lat,lng:lng})];
+    var currentCityData = null; 
     
+    Promise
+        .all(promises)
+        .then(function(data){
+            var currentCityData = data[0];
+            var currentCityForecast = data[1];
+            var forecast = this.calcForecast(currentCityForecast);
+            this.updateData(currentCityData, forecast);
+        }.bind(this))
+        .catch(function(err){
+            // toast error message to user 
+            console.log(err);
+        });  
+},
+    
+calcForecast: function (currentCityForecast) {
+    var counter = 0;
+    var forecast = [];
+    var hourly = [];
+    var dte = null;
+
+    dayCounter = moment(currentCityForecast.list[0].dt_txt).startOf('day');
+    dte = moment(currentCityForecast.list[0].dt_txt).startOf('day');
+    
+    currentCityForecast
+        .list
+        .forEach(function(listItem, index) {           
+            var date = moment(listItem.dt_txt).startOf('day');
+            if (dayCounter.diff(date) === 0) {
+                hourly.push({
+                    dte: listItem.dt_txt,
+                    temp: listItem.main.temp,
+                    wind: listItem.wind.speed
+                });
+
+                dte = date;
+            }
+            else {
+                forecast.push({
+                    hourly: hourly,
+                    date: dte
+                });
+                dayCounter = date;
+                hourly = [];
+            }
+        });
+	
+    console.log('Forecast array');
+    console.log(forecast);
+    return forecast;
+},
+
+updateData: function(currentCityData, weeklyForecast) {
+    this.setState({
+        weather: currentCityData.weather[0].id,
+        desc: currentCityData.weather[0].description,
+        condition: currentCityData.weather[0].main,
+        temp: Math.round(currentCityData.main.temp - 273.15), // Kelvin to Celcius
+        humidity: Math.round(currentCityData.main.humidity),
+        wind: Math.round(currentCityData.wind.speed),
+        name: currentCityData.name,
+		isLocationAvailable: true,
+        forecast: weeklyForecast
     });
-},
-
-// Called before the render method is executed
-componentWillMount: function() {
-
-    // Create a timer to clear the cache after 5 minutes, so we can get updated data from the API
-    setInterval(function() {
-        selectedCityWeather = []; // Empty the cache
-    }, (1000*60*5));
-
-    this.fetchData();
-},
+}
  
 });
 ReactDOM.render(<WeatherHeader />,document.getElementById('app'));
 ReactDOM.render(<Weather />, document.querySelector('.container'));
-//ReactDOM.render(<WeeklyWeatherMolecule/>,document.querySelector('.weeklyContainer'));

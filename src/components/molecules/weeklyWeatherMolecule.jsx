@@ -6,24 +6,15 @@ var classNames = require('classnames');
 var WeeklyWeather = require('../atoms/weeklyWeather.jsx');
 
 var WeeklyWeatherMolecule=React.createClass({
-	 render : function(){
-		 
-		 var temp=this.props.forecast;
-	 
-		 
-		//var temp=this.props.forecast[2].hourly[0].temp;
-		//console.log("Temp is "+temp);
+     
+	 render: function(){
+        var weeklyWeather = this.props.forecast.map(function(dayForecast, index){
+            return <WeeklyWeather key = {index} dayForecast = {dayForecast} />;
+        });
+         console.log(weeklyWeather);
         return(
             <div className="pull-right col-sm-4">
-				
-                <WeeklyWeather>
-                    <WeatherIcon temp = {this.props.temp} weather={this.props.weather} />
-                </WeeklyWeather>
-								
-            <div className="pull-right">
-				<div>Description : {this.props.desc}</div>
-				<div>Condition : {this.props.condition}</div>
-				   	
+                {weeklyWeather}				
             </div>
         );
 	 }
