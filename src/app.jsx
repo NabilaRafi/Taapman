@@ -17,50 +17,41 @@ var Api = require('./utils/api');
 var query = ''; // Expects something like this ?city=London,Paris,Berlin,Madrid
 var selectedCityWeather;
 var currentCity = 0; // Index of current city displayed
-var currentCityName='London';
+var currentCityName = 'London';
 
 var Weather = React.createClass({
     render: function() {
-         
-	   
-		
-         
+    // in componentdidmount ask for location      
     // Render the DOM elements
+	var isLocationAvailable = this.state.isLocationAvailable;
+	var currentWeather = <CurrentWeather currentCityName = {currentCityName} temp={this.state.temp} weather={this.state.weather} wind={this.state.wind} humidity={this.state.humidity}></CurrentWeather>;
+		
+	var weatherNotFound = <div>Location not found</div>; 
     return (<div>
                           
-
               <SearchLocation onNewLocation={this.fetchData}></SearchLocation> 
-			  
-                  
-              <CurrentWeather currentCityName = {currentCityName} temp={this.state.temp} weather={this.state.weather} wind={this.state.wind} humidity={this.state.humidity}></CurrentWeather>
+			                    
+			{(isLocationAvailable) ? currentWeather : weatherNotFound}
              
-			 <WeeklyWeatherMolecule desc={this.state.desc} condition={this.state.condition} wind={this.state.wind} forecast={this.state.forecast}/>
+			 <WeeklyWeatherMolecule desc={this.state.desc} condition={this.state.condition} wind={this.state.wind} forecast={this.state.forecast} />
             </div>);
 },
 
 // Init data for UI
 getInitialState: function() {
-	var forecast=[{}];
-	var hourly=[];
-	hourly.push({
-		temp:'19'
-	});
+	var forecast = [];
 	
-	forecast.push({
-		hourly:hourly,
-		date:'2016-08-08 12:00:00'
-	});
-
     return {
+		isLocationAvailable: false,
         weather: '',
         temp: 0,
         humidity: 0,
         wind: 0,
-        lat: 53.558572,
-        lng : 9.9278215,
+        lat: 0,
+        lng : 0,
 		desc: 'Default description',
 		condition: 'Default condition',
-		forecast:forecast
+		forecast: []
     }  
 },
     
@@ -81,7 +72,8 @@ fetchData: function(lat,lng) {
 								desc: data.weather[0].description,
 								condition: data.weather[0].main,
 								wind: data.wind.speed,
-							  	currentCityName:data.name});
+							  	currentCityName:data.name,
+							  	isLocationAvailable:true});
 				this.updateData();
         }.bind(this));
 	
@@ -154,7 +146,8 @@ updateData: function() {
         temp: Math.round(selectedCityWeather.main.temp - 273.15), // Kelvin to Celcius
         humidity: Math.round(selectedCityWeather.main.humidity),
         wind: Math.round(selectedCityWeather.wind.speed),
-        name:selectedCityWeather.name
+        name:selectedCityWeather.name,
+		isLocationAvailable: true
     
     });
 },
