@@ -27,8 +27,8 @@ var CurrentWeather = React.createClass({
         bgColorClass += 'very-cold';
         }
         return(
-            <div>
-                <div className={bgColorClass}>
+            <div className ='col-sm-8'>
+                <div className={bgColorClass} >
                     <LocationName currentCityName={this.props.currentCityName} >Default</LocationName>
                     <WeatherIcon temp = {this.props.temp} weather={this.props.weather}></WeatherIcon>
                     <WeatherMeasures temp = {this.props.temp} humidity ={this.props.humidity} wind={this.props.wind}></WeatherMeasures>

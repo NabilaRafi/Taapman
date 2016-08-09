@@ -1,6 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-var classNames = require('classnames');
+//var classNames = require('classnames');
 var moment=require('moment');
 
 
@@ -27,14 +27,19 @@ var Weather = React.createClass({
          
     // Render the DOM elements
     return (<div>
-                          
-
-              <SearchLocation onNewLocation={this.fetchData}></SearchLocation> 
-			   <WeeklyWeatherMolecule desc={this.state.desc} condition={this.state.condition} wind={this.state.wind}/>
+        
+              <SearchLocation onNewLocation={this.fetchData}></SearchLocation>
                   
               <CurrentWeather currentCityName = {currentCityName} temp={this.state.temp} weather={this.state.weather} wind={this.state.wind} humidity={this.state.humidity}></CurrentWeather>
+            
+              <WeeklyWeatherMolecule temp = {this.state.temp} weather={this.state.weather}/>
+            
+            <WeeklyWeatherMolecule desc={this.state.desc} condition={this.state.condition} wind={this.state.wind}/>
              
-            </div>);
+            </div>
+             
+           
+           );
 },
 
 // Init data for UI
@@ -77,21 +82,24 @@ fetchData: function(lat,lng) {
         Api.getForecast({lat:lat,lng:lng})
             .then(function(data) {
                 console.log('Forecast API Data is ');
-				console.log(data);
-			console.log(moment().format());
-			console.log(moment().unix());
-			var day1 = moment('2016-08-10 12:00:00');
-			var day2 = moment('2016-08-10 12:00:00');
-			if(day1.diff(day2) == 0)
-				console.log('Same dates');
-			else console.log('Different dates');
-			
-			//console.log(day);
-			for(i=0;i<data.list.length;i++){
-					console.log(data.list[i]);
-					console.log(moment(data.list[i].dt_txt));
-					}
-			
+				//console.log(data.cnt);
+            var forecastData[][] =[][];
+            var count = 1;
+            console.log(data.cnt);
+            if(data.cnt == 40){
+                console.log("reached if");
+                for(i=1; i<= data.cnt; i++){
+                    if(i % 8 == 0){
+                        count += count;
+                        
+                    }
+                    forecastData[count].push(data[i]);
+                    console.log(forecastData);
+                }
+                
+            }else if(data.cnt>=33 && data.cnt <= 39){
+                
+            }
 			
         }.bind(this));
 //    
