@@ -8,15 +8,15 @@ var WeeklyWeather = require('../atoms/weeklyWeather.jsx');
 var WeeklyWeatherMolecule=React.createClass({
      
 	 render: function(){
-        var weeklyWeather = this.props.forecast.map(function(dayForecast, index){
-            return <WeeklyWeather key = {index} dayForecast = {dayForecast} />;
-        });
-         console.log(weeklyWeather);
         return(
             <div className="pull-right col-sm-4">
-                {weeklyWeather}				
+                <WeeklyWeather temp={this.props.forecast[0]} />
+                <WeeklyWeather temp={this.props.forecast[1]} />
+                <WeeklyWeather temp={this.props.forecast[2]} />
+                <WeeklyWeather temp={this.props.forecast[3]} />
+                <WeeklyWeather temp={this.props.forecast[4]} />
             </div>
-        );
+        ); 
 	 }
 });
 

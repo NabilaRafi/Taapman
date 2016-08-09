@@ -2,10 +2,11 @@ var React = require('react');
 
 var WeeklyWeather = React.createClass({
     render : function(){
-        var temp = this.props.dayForecast.hourly[0];
-        return(
+        var dayCast = this.props.temp;
+        
+         return(
             <div className="weeklyItem">
-                <h1>Monday</h1>		
+                 <p>{dayCast.hourly[0].temp}</p>
             </div>
         );
     }
