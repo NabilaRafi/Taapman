@@ -16,6 +16,7 @@ module.exports = {
         });
     },
 	getForecast: function(position){
+		console.log(forecastUrl + position.lat + "&lon="+position.lng+apiUrl);
 		return fetch(forecastUrl + position.lat + "&lon="+position.lng+apiUrl, {
             
             headers: {

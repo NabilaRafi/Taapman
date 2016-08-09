@@ -26,24 +26,33 @@ var Weather = React.createClass({
 		
          
     // Render the DOM elements
-    return (<div>
-        
-              <SearchLocation onNewLocation={this.fetchData}></SearchLocation>
+    return (<div>                  
+
+              <SearchLocation onNewLocation={this.fetchData}></SearchLocation> 
                   
               <CurrentWeather currentCityName = {currentCityName} temp={this.state.temp} weather={this.state.weather} wind={this.state.wind} humidity={this.state.humidity}></CurrentWeather>
             
               <WeeklyWeatherMolecule temp = {this.state.temp} weather={this.state.weather}/>
             
-            <WeeklyWeatherMolecule desc={this.state.desc} condition={this.state.condition} wind={this.state.wind}/>
-             
+            <WeeklyWeatherMolecule desc={this.state.desc} condition={this.state.condition} wind={this.state.wind} forecast={this.state.forecast}/>
             </div>
-             
+           ) 
            
-           );
 },
 
 // Init data for UI
 getInitialState: function() {
+	var forecast=[{}];
+	var hourly=[];
+	hourly.push({
+		temp:'19'
+	});
+	
+	forecast.push({
+		hourly:hourly,
+		date:'2016-08-08 12:00:00'
+	});
+
     return {
         weather: '',
         temp: 0,
@@ -53,7 +62,7 @@ getInitialState: function() {
         lng : 9.9278215,
 		desc: 'Default description',
 		condition: 'Default condition',
-		forecast:[]
+		forecast:forecast
     }  
 },
     
@@ -83,28 +92,61 @@ fetchData: function(lat,lng) {
             .then(function(data) {
                 console.log('Forecast API Data is ');
 				//console.log(data.cnt);
-            var forecastData[][] =[][];
-            var count = 1;
-            console.log(data.cnt);
-            if(data.cnt == 40){
-                console.log("reached if");
-                for(i=1; i<= data.cnt; i++){
-                    if(i % 8 == 0){
-                        count += count;
-                        
-                    }
-                    forecastData[count].push(data[i]);
-                    console.log(forecastData);
-                }
-                
-            }else if(data.cnt>=33 && data.cnt <= 39){
-                
-            }
+/*			console.log(moment());
+			console.log('New date check');
+			var day1 = moment().startOf('day');
+			console.log("Current day");
+			console.log(day1);
+			var day2 = moment('2016-08-08 12:00:00').startOf('day');
+			if(day1.diff(day2) == 0)
+				console.log('Same dates');
+			else console.log('Different dates');*/
+			
+			//console.log(day);
+			var counter=0;
+			var forecast=[{}];
+			var hourly=[{}];
+			var dte;
+			
+			dayCounter=moment(data.list[0].dt_txt).startOf('day');
+			dte=moment(data.list[0].dt_txt).startOf('day');
+			
+			for(i=0;i<data.list.length;i++){
+					if(dayCounter.diff(moment(data.list[i].dt_txt).startOf('day'))==0){
+							hourly.push({
+								dte: data.list[i].dt_txt,
+								temp: data.list[i].main.temp,
+								wind: data.list[i].wind.speed
+							});
+					
+						dte=moment(data.list[i].dt_txt).startOf('day');
+					}
+					else{
+						forecast.push({hourly:hourly,
+								  date: dte});
+						dayCounter=moment(data.list[i].dt_txt).startOf('day');
+						hourly=[];
+					}
+				
+				}
+			
+			
+			console.log('Forecast array');
+			console.log(forecast);
+			this.setState({forecast:forecast});
 			
         }.bind(this));
 //    
 },
-    
+ 			/*	console.log('Moment operations'+i);
+					console.log(dayCounter);
+					console.log(moment(data.list[i].dt_txt).startOf('day'));*/
+			/*	
+					if(dayCounter.diff(moment(data.list[i].dt_txt).startOf('day'))==0)
+						console.log('The dates are same');
+					else
+						console.log('The dates are different');
+					*/
 updateData: function() {
     // Update the data for the UI
     this.setState({
