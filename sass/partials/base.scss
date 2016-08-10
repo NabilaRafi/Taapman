@@ -116,7 +116,7 @@ div #headerStyle{
         }
 
         .wi {
-            font-size: 1.5em;
+            font-size: 1.5em; //1.5
             line-height: 0.8em;
         }
         
@@ -132,7 +132,7 @@ div #headerStyle{
 
         .wi {
             vertical-align: top;
-             width: 50px;
+             width: 50px; 
            
 
             @include mobile {
@@ -148,11 +148,12 @@ div #headerStyle{
 
     .wind {
         .wi {
-//            font-size: .8em;
-             margin-left: 55px;
+            font-size: .8em;
+             margin-left: 55px; 
         }
         .vel {
-            font-size: .9em;
+            font-size: .9em; 
         }
     }
 }
+

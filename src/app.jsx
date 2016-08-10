@@ -96,7 +96,8 @@ calcForecast: function (currentCityForecast) {
                 hourly.push({
                     dte: listItem.dt_txt,
                     temp: listItem.main.temp,
-                    wind: listItem.wind.speed
+                    wind: listItem.wind.speed,
+					weatherIcon: listItem.weather[0].id
                 });
 
                 dte = date;
@@ -104,7 +105,8 @@ calcForecast: function (currentCityForecast) {
             else {
                 forecast.push({
                     hourly: hourly,
-                    date: dte
+                    date: dte,
+					weatherIcon: hourly[0].weatherIcon	
                 });
                 dayCounter = date;
                 hourly = [];
