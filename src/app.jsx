@@ -87,7 +87,9 @@ calcForecast: function (currentCityForecast) {
 
     dayCounter = moment(currentCityForecast.list[0].dt_txt).startOf('day');
     dte = moment(currentCityForecast.list[0].dt_txt).startOf('day');
-    
+   
+	console.log(currentCityForecast);
+	
     currentCityForecast
         .list
         .forEach(function(listItem, index) {           
@@ -96,6 +98,7 @@ calcForecast: function (currentCityForecast) {
                 hourly.push({
                     dte: listItem.dt_txt,
                     temp: listItem.main.temp,
+					humidity: listItem.main.humidity,
                     wind: listItem.wind.speed,
 					weatherIcon: listItem.weather[0].id
                 });

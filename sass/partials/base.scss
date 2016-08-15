@@ -51,12 +51,20 @@ div #headerStyle{
 }
 
 .weeklyItem{
-	color: red;
-	background-color: lightgray;
+	color: #222222;
 	width: 150px;
-	padding: 5px;
-	
+	padding: 10px;	
+	background-color: #f7f9f9;
+	border-style: dotted;
+	border: 1px solid black;
 }
+
+.weekly-weather-widget{
+	border-style: dotted;
+	border-color: black;	
+}
+
+
 .city {
     font-size: 4em;
     text-transform: uppercase;
@@ -67,7 +75,6 @@ div #headerStyle{
 
 .weather{
     display: table;
-    height: 415px;
     width: 100%;
     text-align: center;
     border-bottom: 2px solid white;
@@ -87,7 +94,15 @@ div #headerStyle{
             font-size: 15em;
          }
     }
+	.weekly-icon{
+		font-size: 3em;
+	}
+	@include mobile {
+            font-size: 2em;
+         }
 }
+
+
 
 .weather-details {
     overflow: hidden;
@@ -98,7 +113,7 @@ div #headerStyle{
     text-align: center;
     font-size: 2.5em;
     
-    
+	    
 
     .temp {
         font-size: 2.5em;

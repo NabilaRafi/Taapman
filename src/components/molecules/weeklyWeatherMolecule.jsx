@@ -9,7 +9,7 @@ var WeeklyWeatherMolecule=React.createClass({
      
 	 render: function(){
         return(
-            <div className="pull-right col-sm-4">
+            <div className="pull-right col-sm-4 weekly-weather-widget">
                 <WeeklyWeather temp={this.props.forecast[0]} />
                 <WeeklyWeather temp={this.props.forecast[1]} />
                 <WeeklyWeather temp={this.props.forecast[2]} />

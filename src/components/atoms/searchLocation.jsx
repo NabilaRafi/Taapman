@@ -12,7 +12,7 @@ var SearchLocation = React.createClass({
                       initialValue=""
                       onSuggestSelect={this.onSuggestSelect}
                       location={new google.maps.LatLng(53.558572, 9.9278215)}
-                      radius="2"/>
+                      radius="2" autofocus/>
                 </div>
                 <div className="col-sm-4"></div>
            </div>
