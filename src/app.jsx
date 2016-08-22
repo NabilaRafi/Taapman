@@ -87,14 +87,15 @@ calcForecast: function (currentCityForecast) {
 
     dayCounter = moment(currentCityForecast.list[0].dt_txt).startOf('day');
     dte = moment(currentCityForecast.list[0].dt_txt).startOf('day');
-   
-	console.log(currentCityForecast);
 	
     currentCityForecast
         .list
         .forEach(function(listItem, index) {           
             var date = moment(listItem.dt_txt).startOf('day');
+        console.log(date);
+        console.log(listItem.weather[0].id)
             if (dayCounter.diff(date) === 0) {
+                console.log("Weather Icon" +listItem.weather[0].id)
                 hourly.push({
                     dte: listItem.dt_txt,
                     temp: listItem.main.temp,
@@ -106,6 +107,9 @@ calcForecast: function (currentCityForecast) {
                 dte = date;
             }
             else {
+                debugger;
+                console.log("Weather Icon" +listItem.weather[0].id)
+                console.log( hourly[0].weatherIcon)
                 forecast.push({
                     hourly: hourly,
                     date: dte,
@@ -122,6 +126,7 @@ calcForecast: function (currentCityForecast) {
 },
 
 updateData: function(currentCityData, weeklyForecast) {
+    console.log(weeklyForecast)
     this.setState({
         weather: currentCityData.weather[0].id,
         desc: currentCityData.weather[0].description,
@@ -131,7 +136,7 @@ updateData: function(currentCityData, weeklyForecast) {
         wind: Math.round(currentCityData.wind.speed),
         name: currentCityData.name,
 		isLocationAvailable: true,
-        forecast: weeklyForecast
+        forecast: weeklyForecast,
     });
 }
  
