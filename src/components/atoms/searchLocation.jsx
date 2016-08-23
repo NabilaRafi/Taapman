@@ -11,7 +11,6 @@ var SearchLocation = React.createClass({
                       placeholder="Enter the location ..."
                       initialValue=""
                       onSuggestSelect={this.onSuggestSelect}
-                      autoActivateFirstSuggest = "true"
                       location={new google.maps.LatLng(53.558572, 9.9278215)}
                       radius="1" autofocus/>
                 </div>
@@ -20,7 +19,6 @@ var SearchLocation = React.createClass({
         );
     },
     onSuggestSelect: function(suggest) {
-    //console.log(suggest);
       
       var geocoder = new google.maps.Geocoder();
         var latitude;

@@ -6,9 +6,10 @@ var classNames = require('classnames');
 var WeeklyWeather = require('../atoms/weeklyWeather.jsx');
 
 var WeeklyWeatherMolecule=React.createClass({
-     
-	 render: function(){
+    
+  render: function(){
         return(
+            
             <div className="pull-right col-sm-4 weekly-weather-widget">
                 <WeeklyWeather temp1={this.props.forecast[0]} />
                 <WeeklyWeather temp1={this.props.forecast[1]} />
