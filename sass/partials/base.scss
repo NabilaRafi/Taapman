@@ -1,9 +1,9 @@
 // Colours
-$very-warm: #FF8500;
-$warm: #FF8500;
-$normal: #FF8500;
-$cold: #FF8500;
-$very-cold: #FF8500;
+$very-warm: #f6f6f6;
+$warm: #f6f6f6;
+$normal: #f6f6f6;
+$cold: #f6f6f6;
+$very-cold: #f6f6f6;
 
 // Breakpoints
 $mobile-width: 500px;
@@ -38,7 +38,7 @@ $mobile-width: 500px;
 
 div #headerStyle{
    text-align: center; 
-   color:brown;
+   color:#2a2a2a;
    font-weight: 700;
    font-size: xx-large;
    padding-bottom: 20px;
@@ -46,12 +46,12 @@ div #headerStyle{
 }
 
 #headerDiv{
-   background-color: ghostwhite;
+   background-color: #f7f9f9;
    
 }
 
 .weeklyItem{
-	color: #222222;
+	color:  #2a2a2a;
 	width: 150px;
 	padding: 5px 40px 0px 40px;	
 	background-color: #f7f9f9;
